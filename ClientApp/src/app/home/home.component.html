@@ -1,0 +1,50 @@
+<h1>Calculadora</h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-lg">Número 1</span>
+      </div>
+      <input type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="numero1">
+    </div>
+  </div>
+  
+  <div class="col-md-6">
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-lg">Número 2</span>
+      </div>
+      <input type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="numero2">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="input-group mb-3 form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01">Options</label>
+      </div>
+      <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="operacao">
+        <option value="" selected>Choose...</option>
+        <option value="1">Soma</option>
+        <option value="2">Subtração</option>
+        <option value="3">Multiplicação</option>
+        <option value="4">Divisão</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-9">
+      <div class="input-group input-group-lg form-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-lg">Resultado</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="resultado" readonly>
+      </div>
+  </div>
+  <div class="col-md-3">
+    <button type="button" class="btn btn-dark btn-lg btn-block" (click)="calcular()">Calcular</button>
+  </div>
+</div>

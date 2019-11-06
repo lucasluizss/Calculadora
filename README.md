@@ -20,7 +20,7 @@ dotnet run
 
 ## Print(s)
 
-![Página Inicial](https://github.com/lucasluizss/Calculadora/tree/master/ClientApp/src/assets/img/calculadora.png)
+![Página Inicial](https://github.com/lucasluizss/Calculadora/blob/master/ClientApp/src/assets/img/calculadora.PNG)
 
 ## Contributing
 Pull requests são bem vindos. Para maiores mudanças, por favor abra uma issue primeiro para discutir o que você gostaria de alterar.

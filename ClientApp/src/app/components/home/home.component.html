@@ -1,0 +1,52 @@
+<h1>Calculadora</h1>
+
+<form (ngSubmit)="calcular()">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="input-group input-group-lg form-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-lg">Número 1</span>
+        </div>
+        <input type="text" name="numero1" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="request.numero1" required>
+      </div>
+    </div>
+    
+    <div class="col-md-6">
+      <div class="input-group input-group-lg form-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-lg">Número 2</span>
+        </div>
+        <input type="text" name="numero2" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="request.numero2" required>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="input-group mb-3 form-group">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Operações</label>
+        </div>
+        <select class="form-control form-control-lg" name="operacao" id="inputGroupSelect01" [(ngModel)]="request.operacao" required>
+          <option value="" selected>Choose...</option>
+          <option value="1">Soma</option>
+          <option value="2">Subtração</option>
+          <option value="3">Multiplicação</option>
+          <option value="4">Divisão</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-9">
+        <div class="input-group input-group-lg form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-lg">Resultado</span>
+          </div>
+          <input type="text" name="resultado" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="resultado" readonly>
+        </div>
+    </div>
+    <div class="col-md-3">
+      <button type="submit" class="btn btn-dark btn-lg btn-block">Calcular</button>
+    </div>
+  </div>
+</form>

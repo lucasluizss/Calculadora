@@ -4,6 +4,6 @@ namespace Calculadora.Models
     {
         public decimal Numero1 { get; set; }
         public decimal Numero2 { get; set; }
-        public decimal Operacao { get; set; }
+        public ECodigoOperacao Operacao { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Calculadora.Models;
+using Calculadora.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -9,14 +10,19 @@ namespace Calculadora.Controllers
 {
     [ApiController]
     [Route("api")]
-    public class WeatherForecastController : ControllerBase
+    public class ApiController : ControllerBase
     {
+        private readonly IEnumerable<ICalculatorService> _calculatorServices;
         private static List<HistoricoViewModel> historico = new List<HistoricoViewModel>(0);
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<ApiController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public ApiController(
+            ILogger<ApiController> logger,
+            IEnumerable<ICalculatorService> calculatorServices
+        )
         {
+            _calculatorServices = calculatorServices;
             _logger = logger;
         }
 
@@ -28,28 +34,13 @@ namespace Calculadora.Controllers
         [Route("Calcular")]
         public ActionResult Calcular([FromBody] RequestViewModel request)
         {
-            var response = Processar(request);
+            var service = _calculatorServices.FirstOrDefault(c => c.CodigoOperacao == request.Operacao) ?? throw new ArgumentException("Service not found");
+
+            var response = service.Execute(request);
 
             historico.Add(new HistoricoViewModel(request, response));
 
             return Ok(response);
-        }
-
-        private static decimal Processar(RequestViewModel request)
-        {
-            switch (request.Operacao)
-            {
-                case 1:
-                    return request.Numero1 + request.Numero2;
-                case 2:
-                    return request.Numero1 - request.Numero2;
-                case 3:
-                    return request.Numero1 * request.Numero2;
-                case 4:
-                    return request.Numero1 / request.Numero2;
-                default:
-                    return 0;
-            }
         }
     }
 }

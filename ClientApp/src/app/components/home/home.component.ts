@@ -1,15 +1,13 @@
-import { ApiService } from './../services/api-service';
+import { ApiService } from './../../services/api-service';
 import { Component } from '@angular/core';
+import { Request } from '../../models/request.model';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-  public numero1: number;
-  public numero2: number;
-
-  public operacao: number;
+  public request: Request = new Request();
   public resultado: number;
 
   constructor(
@@ -17,11 +15,7 @@ export class HomeComponent {
   ) {}
 
   public calcular(): void {
-    this._apiService.calcular(
-      Number(this.numero1), 
-      Number(this.numero2), 
-      Number(this.operacao)
-    )
+    this._apiService.calcular(this.request)
       .subscribe(response => {
         this.resultado = response;
       }, error => {

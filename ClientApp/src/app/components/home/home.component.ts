@@ -7,6 +7,9 @@ import { Request } from '../../models/request.model';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
+  public type: string;
+  public message: string;
+
   public request: Request = new Request();
   public resultado: number;
 
@@ -14,13 +17,20 @@ export class HomeComponent {
     private _apiService: ApiService
   ) {}
 
+  private alert(type: string, message: string = '') : void {
+    this.type = type;
+    this.message = message;
+    setTimeout(() => { this.type = this.message = ''; }, 5000);
+  }
+
   public calcular(): void {
     this._apiService.calcular(this.request)
       .subscribe(response => {
         this.resultado = response;
+        this.request = new Request();
+        this.alert('success');
       }, error => {
-        alert(`Ocorreu um erro inesperado, por favor tente novamente`);
-        console.error(error);
+        this.alert('warning', `Ocorreu um erro inesperado, por favor tente novamente`);
       });
   }
 }

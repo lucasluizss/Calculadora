@@ -42,11 +42,12 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-lg">Resultado</span>
           </div>
-          <input type="text" name="resultado" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="resultado" readonly>
+          <input type="text" name="resultado" style="cursor: not-allowed;" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="resultado" readonly>
         </div>
     </div>
     <div class="col-md-3">
       <button type="submit" class="btn btn-dark btn-lg btn-block">Calcular</button>
     </div>
   </div>
+  <app-alert [type]='type' [message]='message'></app-alert>
 </form>

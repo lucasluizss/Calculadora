@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Calculadora.Models;
 using Calculadora.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +10,7 @@ using Microsoft.Extensions.Logging;
 namespace Calculadora.Controllers
 {
     [ApiController]
-    [Route("api")]
+    [Route("[controller]/[action]")]
     public class ApiController : ControllerBase
     {
         private readonly IEnumerable<ICalculatorService> _calculatorServices;
@@ -27,11 +28,9 @@ namespace Calculadora.Controllers
         }
 
         [HttpGet]
-        [Route("Get")]
         public IEnumerable<HistoricoViewModel> Get() => historico;
 
         [HttpPost]
-        [Route("Calcular")]
         public ActionResult Calcular([FromBody] RequestViewModel request)
         {
             var service = _calculatorServices.FirstOrDefault(c => c.CodigoOperacao == request.Operacao) ?? throw new ArgumentException("Service not found");
@@ -42,5 +41,17 @@ namespace Calculadora.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet]
+        public IActionResult Download() 
+        {
+            var csvString = string.Join(';', historico);
+
+            return Ok(new {
+                FileName = $"Historico_{DateTime.Now.ToString("yyyyMMDD")}.csv",
+                FileStreamResult = Encoding.ASCII.GetBytes(csvString)
+            });
+        }
+
     }
 }

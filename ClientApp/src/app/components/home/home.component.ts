@@ -20,7 +20,6 @@ export class HomeComponent {
   private alert(type: string, message: string = '') : void {
     this.type = type;
     this.message = message;
-    setTimeout(() => { this.type = this.message = ''; }, 5000);
   }
 
   public calcular(): void {

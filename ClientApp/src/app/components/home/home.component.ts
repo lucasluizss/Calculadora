@@ -17,7 +17,7 @@ export class HomeComponent {
     private _apiService: ApiService
   ) {}
 
-  private alert(type: string, message: string = '') : void {
+  private alert(type: string, message: string = ''): void {
     this.type = type;
     this.message = message;
   }

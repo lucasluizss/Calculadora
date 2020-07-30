@@ -23,6 +23,7 @@ namespace Calculadora
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
             services.AddTransient<ICalculatorService, SomaService>();
             services.AddTransient<ICalculatorService, SubtracaoService>();
             services.AddTransient<ICalculatorService, MultiplicacaoService>();

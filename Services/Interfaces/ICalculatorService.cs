@@ -6,6 +6,6 @@ namespace Calculadora.Services.Interfaces
 	{
 		ECodigoOperacao CodigoOperacao { get; }
 
-		decimal Execute(RequestViewModel request);
+		decimal Execute(IRequestViewModel request);
 	}
 }

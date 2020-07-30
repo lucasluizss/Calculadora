@@ -21,6 +21,6 @@ export class ApiService {
   }
 
   download(): Observable<any> {
-    return this.http.get<any>(`${this._baseUrl}api/Download`);
+    return this.http.post<any>(`${this._baseUrl}api/Download`, { responseType: 'blob' });
   }
 }

@@ -6,10 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { HistoryComponent } from './components/history/history.component';
-import { HomeComponent } from './components/home/home.component';
-import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
-import { AlertComponent } from './components/shared/alert/alert/alert.component';
+import { HistoryComponent } from './pages/history/history.component';
+import { HomeComponent } from './pages/home/home.component';
+import { NavMenuComponent } from './pages/nav-menu/nav-menu.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [

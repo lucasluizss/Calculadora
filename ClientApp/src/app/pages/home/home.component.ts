@@ -1,4 +1,4 @@
-import { ApiService } from './../../services/api-service';
+import { ApiService } from '../../services/api-service';
 import { Component } from '@angular/core';
 import { Request } from '../../models/request.model';
 

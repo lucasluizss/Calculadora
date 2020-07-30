@@ -1,4 +1,11 @@
-<h1 id="tableLabel">Histórico</h1>
+<div class="row">
+  <div class="col-md-10">
+    <h1 id="tableLabel">Histórico</h1>
+  </div>
+  <div class="col-md-2">
+    <button class="btn btn-dark btn-block" (click)="exportar()"> Exportar </button>
+  </div>
+</div>
 
 <p *ngIf="!historico"><em>Loading...</em></p>
 
@@ -7,17 +14,17 @@
     <tr>
       <th>Data</th>
       <th>Número 1</th>
-      <th>Número 2</th>
       <th>Operação</th>
+      <th>Número 2</th>
       <th>Resultado</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of historico">
-      <td>{{ item.date | date: 'dd/MM/yyyy' }}</td>
-      <td>{{ item.numero1 }}</td>
+      <td>{{ item.date | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
       <td>{{ item.numero1 }}</td>
       <td>{{ descricaoOperacao(item.operacao) }}</td>
+      <td>{{ item.numero1 }}</td>
       <td>{{ item.resultado }}</td>
     </tr>
   </tbody>

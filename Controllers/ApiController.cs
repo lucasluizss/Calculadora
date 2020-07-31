@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Calculadora.Models;
+using Calculadora.Notations;
 using Calculadora.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -48,16 +49,18 @@ namespace Calculadora.Controllers
             return Ok(response);
         }
 
-        // [HttpPost]
-        // public FileResult Download()
-        // {
-        //     var fileName = $"Historico_{DateTime.Now.ToString("yyyyMMDD")}.csv";
-        //     var csvString = string.Concat(historicoList.Select(h => $"{h.Date};{h.Numero1};{h.Operacao};{h.Numero2};{h.Resultado};"));
+        [HttpGet]
+        public FileResult Download()
+        {
+            var fileName = $"Historico_{DateTime.Now.ToString("yyyyMMDD")}.csv";
 
-        //     return new FileContentResult(GetFile(csvString), "application/octet-stream");
-        // }
+            return new FileContentResult(GetFile(), "text/csv")
+            {
+                FileDownloadName = fileName
+            };
+        }
 
-        private static byte[] GetFile(string data)
+        private static byte[] GetFile()
         {
             var sb = new StringBuilder();
 
@@ -72,17 +75,13 @@ namespace Calculadora.Controllers
 
             sb.Append(Environment.NewLine);
 
-            sb.Append(data);
-
-            using (var ms = new MemoryStream())
+            foreach (var item in historicoList)
             {
-                using (var writer = new StreamWriter(ms, Encoding.UTF8))
-                {
-                    writer.WriteLine(sb.ToString());
-                }
-
-                return ms.ToArray();
+                sb.Append($"{item.Date};{item.Numero1};{item.Operacao};{item.Numero2};{item.Resultado};");
+                sb.Append(Environment.NewLine);
             }
+
+            return Encoding.UTF8.GetBytes(sb.ToString());
         }
 
         private static IEnumerable<PropertyInfo> GetCampos<T>()
@@ -94,22 +93,5 @@ namespace Calculadora.Controllers
         {
             return ((TitleToExport)field.GetCustomAttributes(typeof(TitleToExport), true).First());
         }
-    }
-
-    public class TitleToExport : ValidationAttribute
-    {
-        public readonly string Title;
-
-        public readonly Type FormatType;
-
-        public TitleToExport() { }
-
-        public TitleToExport(string title) => Title = title;
-
-        // public TitleToExport(string title, Type formatType)
-        // {
-        //     Title = title;
-        //     FormatType = formatType;
-        // }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using Calculadora.Controllers;
+using Calculadora.Notations;
 
 namespace Calculadora.Models
 {
@@ -11,10 +12,11 @@ namespace Calculadora.Models
             Operacao = request.Operacao;
             Numero2 = request.Numero2;
             Resultado = resultado;
+            Date = DateTime.Now;
         }
 
         [TitleToExport("Data")]
-        public DateTime Date => DateTime.Now;
+        public DateTime Date { get; set; }
 
         [TitleToExport("Numero 1")]
 		public decimal Numero1 { get; set; }

@@ -7,10 +7,10 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="inputGroup-sizing-lg">Número 1</span>
         </div>
-        <input type="text" name="numero1" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="request.numero1" required>
+        <input type="text" name="numero1" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="request.numero1" required autofocus>
       </div>
     </div>
-    
+
     <div class="col-md-6">
       <div class="input-group input-group-lg form-group">
         <div class="input-group-prepend">
@@ -46,7 +46,7 @@
         </div>
     </div>
     <div class="col-md-3">
-      <button type="submit" class="btn btn-dark btn-lg btn-block">Calcular</button>
+      <button type="submit" class="btn btn-dark btn-lg btn-block" [disabled]="!(request.numero1 && request.numero2)" >Calcular</button>
     </div>
   </div>
   <app-alert [type]='type' [message]='message'></app-alert>

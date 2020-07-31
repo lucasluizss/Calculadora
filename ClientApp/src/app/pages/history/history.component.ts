@@ -1,6 +1,7 @@
 import { DescricaoCodigoOperacao } from '../../models/ecodigooperacao.enum';
 import { ApiService } from '../../services/api-service';
 import { Component, OnInit } from '@angular/core';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-history',
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryComponent implements OnInit {
   public historico: Historico[];
+  public type: string;
+  public message: string;
 
   constructor(private _apiService: ApiService) { }
 
@@ -19,18 +22,22 @@ export class HistoryComponent implements OnInit {
     return DescricaoCodigoOperacao.get(x);
   }
 
-  exportar() {
-    this._apiService.download().subscribe(data => {
-      this.baixarArquivo(
-        data,
-        `application/octet-stream`,
-        `historico`,
-        'csv'
-      );
-    });
+  private alert(type: string, message: string = ''): void {
+    this.type = type;
+    this.message = message;
   }
 
-  private baixarArquivo(
+  public download(): void {
+    this._apiService.download()
+      .subscribe(response => {
+        this.downloadFile(response, `text/csv`, `Calculator_history_${new Date()}`, 'csv');
+        this.alert('success');
+      }, error => {
+        this.alert('warning', `Ocorreu um erro inesperado, por favor tente novamente`);
+      });
+  }
+
+  private downloadFile(
     data: any,
     tipo: string,
     nome: string,

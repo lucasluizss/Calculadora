@@ -10,9 +10,10 @@ namespace Calculadora.Models
             Operacao = request.Operacao;
             Numero2 = request.Numero2;
             Resultado = resultado;
+            Date = DateTime.Now;
         }
 
-        public DateTime Date => DateTime.Now;
+        public DateTime Date { get; set; }
 
         public decimal? Resultado { get; set; }
 	}

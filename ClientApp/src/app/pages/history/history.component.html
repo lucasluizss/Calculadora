@@ -3,7 +3,7 @@
     <h1 id="tableLabel">Histórico</h1>
   </div>
   <div class="col-md-2">
-    <button class="btn btn-dark btn-block" (click)="exportar()"> Exportar </button>
+    <button class="btn btn-dark btn-block" (click)="download()"> Exportar </button>
   </div>
 </div>
 
@@ -29,3 +29,4 @@
     </tr>
   </tbody>
 </table>
+<app-alert [type]='type' [message]='message'></app-alert>
